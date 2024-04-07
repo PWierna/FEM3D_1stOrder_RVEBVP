@@ -1,6 +1,6 @@
-project_path    = "Cases/TestMicro01_MKC/";
-model_fname     = "microPorto01.mat";
-materials_fname = "meso_materials_2.mat";
+project_path    = "Example/";
+model_fname     = "micro_model.mat";
+materials_fname = "micro_materials.mat";
 
 %% LOAD FILES -------------------------------------------------------------------- %%
 load(project_path+model_fname,'RVEMODEL');
@@ -8,11 +8,11 @@ load(project_path+materials_fname,'MESO_MATERIALS');
 
 %% INPUTS ------------------------------------------------------------------------ %%
 %Set options:
-Options.kinadm_conditions_type = "Minimal"; %Options: "Periodic" , "Linear" , "Taylor" , "Minimal"
+Options.kinadm_conditions_type = "Periodic"; %Options: "Periodic" , "Linear" , "Taylor" , "Minimal"
 Options.quadrature = "Gauss 3x3x3";
 Options.Meso.Verbosity = 1;
-Options.vtk_filename = 'mkc_d';
-Options.insertion_type = "Displacements";
+Options.vtk_filename = 'vtk_output';
+Options.insertion_type = "Strains";
 
 %RVEMODEL.Conectivity(:,2)=1;%Force homogeneous
 
