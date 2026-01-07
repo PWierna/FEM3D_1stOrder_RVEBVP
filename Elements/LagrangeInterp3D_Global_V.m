@@ -21,7 +21,7 @@ n_coords(:,3,:) = reshape(MODEL.Coordinates(con_gips,4),n_gips,1,npe);  %Z Coord
 %% PARSE INTERPOLATION DATA ====================================================== %%
 % Rearrangement as column vectors: 
 %   Row     : Global IP Number
-%   3rd Dim : ith node (1 to 8)
+%   3rd Dim : ith node
 N        = permute( InterpData(:,1,globalips_conect(:,2)) , [3,2,1] );
 dNdXi    = permute( InterpData(:,2,globalips_conect(:,2)) , [3,2,1] );
 dNdEta   = permute( InterpData(:,3,globalips_conect(:,2)) , [3,2,1] );

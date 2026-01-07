@@ -3,9 +3,6 @@ function [ Strains, FluctStrains, Stresses, IntVarsNew , d_New , MesoState ] = M
 % - High-Fidelity Mesoscale Equilibrium Problem: 3DRVE for plates (4DoF elements) - % 
 % ------------------------ Newton-Raphson Iterative Scheme ------------------------ %
 %                                                                                   %
-%         International Centre for Numerical Methods in Engineering (CIMNE)         %
-%      RTD Group on Computational Design and Analysis of Engineering Materials      %
-%                      and Metamaterials (COMP - DES - MAT)                         %
 %                                                                                   %
 %                                                                  PWierna  20-X-22 %
 %% =============================================================================== %%
@@ -20,17 +17,7 @@ dofpn      = 3;	%dofs per node( Hard setting )
 
 %% 1st COMPUTATIONS ============================================================== %% 
 n_dofs  = dofpn * size(RVEMODEL.Coordinates, 1); %Total N°dofs
-StrainM = reshape(StrainM,6,1); %Assert macro-strain vector is in col fashion
-
-% npe    = size(RVEMODEL.Conectivity(:,2:end),2);
-% 
-% %-Get element type (we assume uniform mesh):
-% switch npe
-%     case 8 %8-noded bilinear element
-%         elem_type = "Hexa8N";
-%     case 27
-%         elem_type = "Hexa27N";
-% end
+StrainM = reshape(StrainM,6,1); %Assert macro-strain vector is in column fashion
 
 %-Compute Boundary conditions Matrix:
 [ L , dofd ] = build_RVE3D_BCmatrix( RVEMODEL , Options );   
@@ -48,7 +35,7 @@ norm_res0 = 1;     %Reference Residual Norm to evaluate convergence criteria
 %Report RVE Equilibrium Problem ID:
 if Options.Meso.Verbosity == 1
     %fprintf(ProcessData.OutputID,'\n\t\t MESO PROBLEM: Macro Element N°%d-IP %d\n',elem_macro,ip_macro);
-    fprintf(         1          ,'\n\t\t MESO PROBLEM: Macro Element N°%d-IP %d\n',elem_macro,ip_macro);
+    fprintf(1, '\n\t\t MESO PROBLEM: Macro Element N°%d-IP %d\n',elem_macro,ip_macro);
 end
 
 
@@ -57,7 +44,7 @@ while ( norm_res >= res_tol && iter <= max_iter )
 
     if Options.Meso.Verbosity == 1
         %fprintf(ProcessData.OutputID,'\t\t\t Meso [NEWTON-RAPHSON] Iteration %d:',iter);
-        fprintf(         1          ,'\t\t\t Meso [NEWTON-RAPHSON] Iteration %d:',iter);
+        fprintf(1, '\t\t\t Meso [NEWTON-RAPHSON] Iteration %d:',iter);
     end
     
     %Evaluate tg stiffness and internal force vector:
@@ -76,7 +63,7 @@ while ( norm_res >= res_tol && iter <= max_iter )
     %Report
     if Options.Meso.Verbosity == 1
         %fprintf(ProcessData.OutputID,'\t| res | = %4.6e\n', norm_res);
-        fprintf(         1          ,'\t| res | = %4.6e\n', norm_res);
+        fprintf(1, '\t| res | = %4.6e\n', norm_res);
     end
     
     %If converged, break while loop
@@ -105,15 +92,15 @@ if iter > max_iter
         %fprintf(ProcessData.OutputID, '\n\t [NEWTON-RAPHSON] WARNING - Max N° of iterations exceeded\n');
         %fprintf(ProcessData.OutputID, '\t                  Solver did not converge. ElemMacro%d IP%d \n',elem_macro,ip_macro);
         %fprintf(ProcessData.OutputID, '\t                  |res| = %1.4e > %1.4e = tol\n', norm_res,res_tol);
-        fprintf(         2          , '\n\t [NEWTON-RAPHSON] WARNING - Max N° of iterations exceeded\n');
-        fprintf(         2          , '\t                  Solver did not converge. ElemMacro%d IP%d \n',elem_macro,ip_macro);
-        fprintf(         2          , '\t                  |res| = %1.4e > %1.4e = tol\n', norm_res,res_tol);
+        fprintf(2, '\n\t [NEWTON-RAPHSON] WARNING - Max N° of iterations exceeded\n');
+        fprintf(2, '\t                  Solver did not converge. ElemMacro%d IP%d \n',elem_macro,ip_macro);
+        fprintf(2, '\t                  |res| = %1.4e > %1.4e = tol\n', norm_res,res_tol);
     end
 else
     MesoState = 1;
     if Options.Meso.Verbosity == 1
         %fprintf(ProcessData.OutputID,'\t\t\t Meso Problem EL%d - IP%d Converged in [ %d / %d ] iterations .-\n', elem_macro, ip_macro, iter, max_iter);
-        fprintf(         1          ,'\t\t\t Meso Problem EL%d - IP%d Converged in [ %d / %d ] iterations .-\n', elem_macro, ip_macro, iter, max_iter);
+        fprintf(1, '\t\t\t Meso Problem EL%d - IP%d Converged in [ %d / %d ] iterations .-\n', elem_macro, ip_macro, iter, max_iter);
     end
 end
 

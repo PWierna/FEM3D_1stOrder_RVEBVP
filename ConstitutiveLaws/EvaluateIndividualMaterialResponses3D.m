@@ -27,7 +27,9 @@ for mat_id = 1:length(true_materials_ids)
         case "IsotContDamage3D"
             %TODO
         case "OrthotropicElastic3D"
-            [ Stresses(idxmat_gips,:) , TgModulis(idxmat_gips,:) ] = OrthotropicElastic3D_V( Strains(idxmat_gips,:) , matprops );
+            [ Stresses(idxmat_gips,:),...
+              TgModulis(idxmat_gips,:) ...
+              ] = OrthotropicElastic3D_V( Strains(idxmat_gips,:), matprops );
             %IntVarsNew.Damage(idxmat_gips,:)     = 0.0;
             %IntVarsNew.StrainLike(idxmat_gips,:) = 0.0;
         case "VoigtFibersMatrix_Damage"

@@ -88,8 +88,9 @@ if isstruct( CellData )
     
 end
 
-%Close file
+%Close file and report
 fclose(fid);
+fprintf("Output file written:" + filename + ".vtk");
 
 end
 
